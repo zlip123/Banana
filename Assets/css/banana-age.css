@@ -1,0 +1,78 @@
+/* BananaAge Plugin - Time-based Task Card Coloring */
+
+/* Age-based color classes */
+.banana-age-fresh {
+    background: linear-gradient(135deg, #d4f1d4 0%, #a8e6a8 100%) !important;
+    border-left: 5px solid #4caf50 !important;
+}
+
+.banana-age-moderate {
+    background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%) !important;
+    border-left: 5px solid #fbc02d !important;
+}
+
+.banana-age-old {
+    background: linear-gradient(135deg, #ffccbc 0%, #ffab91 100%) !important;
+    border-left: 5px solid #ff5722 !important;
+}
+
+/* Optional: Add a subtle age indicator badge */
+.banana-age-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Make task cards position relative for badge positioning */
+.task-board .task-board-title {
+    position: relative;
+}
+
+/* Enhance the visual feedback on hover */
+.banana-age-fresh:hover {
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.banana-age-moderate:hover {
+    background: linear-gradient(135deg, #fff59d 0%, #fff176 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.banana-age-old:hover {
+    background: linear-gradient(135deg, #ffab91 0%, #ff8a65 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Smooth transitions */
+.task-board {
+    transition: all 0.3s ease;
+}
+
+/* Optional: Fun banana emoji indicators */
+.banana-age-fresh::before {
+    content: "🍏 ";
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.banana-age-moderate::before {
+    content: "🍌 ";
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.banana-age-old::before {
+    content: "🍂 ";
+    font-size: 12px;
+    opacity: 0.7;
+}

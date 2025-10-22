@@ -1,66 +1,52 @@
 <?php
 
-namespace Kanboard\Plugin\PluginNameExampleStudlyCaps;
+namespace Kanboard\Plugin\Banana;
 
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
-// use Kanboard\Plugin\PluginNameExampleStudlyCaps\Helper\MyHelper;  // Helper Class and Filename should be exact
-// use Kanboard\Helper;  // Add core Helper for using forms etc. inside external templates
 
+/**
+ * Banana Plugin
+ *
+ * Automatically colors task cards based on their age:
+ * - Green (0-3 days) - Fresh tasks
+ * - Yellow (3-7 days) - Moderate age
+ * - Brown/Orange (7+ days) - Old tasks
+ *
+ * @package  Banana
+ * @author   Zelda Greenwald
+ * @license  MIT
+ */
 class Plugin extends Base
 {
     public function initialize()
     {
-        // Template Override
-        //  - Override name should be camelCase e.g. pluginNameExampleCamelCase
-        $this->template->setTemplateOverride('action/index', 'pluginNameExampleCamelCase:action/index');
-
-        // CSS - Asset Hook
-        //  - Keep filename lowercase
-        $this->hook->on('template:layout:css', array('template' => 'plugins/PluginNameExampleStudlyCaps/Assets/css/plugin-name.css'));
-
-        // JS - Asset Hook
-        //  - Keep filename lowercase
-        $this->hook->on('template:layout:js', array('template' => 'plugins/PluginNameExampleStudlyCaps/Assets/js/plugin-name.js'));
-
-        // Views - Template Hook
-        //  - Override name should start lowercase e.g. pluginNameExampleCamelCase
-        $this->template->hook->attach('template:project-header:view-switcher-before-project-overview', 'pluginNameExampleCamelCase:project_header/actions');
-
-        // Views - Add Menu Item - Template Hook
-        //  - Override name should start lowercase e.g. pluginNameExampleCamelCase
-        //  - Example for menu item in kanboard settings page: $this->template->hook->attach('template:config:sidebar', 'pluginNameExampleCamelCase:config/sidebar');
-
-        // Extra Page - Routes
-        //  - Example: $this->route->addRoute('/my/custom/route', 'MyController', 'show', 'PluginNameExampleStudlyCaps');
-        //  - Must have the corresponding action in the matching controller
-        $this->route->addRoute('/ / ', ' ', ' ', 'PluginNameExampleStudlyCaps');
-
-        // Helper
-        //  - Example: $this->helper->register('helperClassNameCamelCase', '\Kanboard\Plugin\PluginNameExampleStudlyCaps\Helper\HelperNameExampleStudlyCaps');
-        //  - Add each Helper in the 'use' section at the top of this file
-        $this->helper->register('myHelper', '\Kanboard\Plugin\PluginNameExampleStudlyCaps\Helper\MyHelper');
+        // Add custom CSS to the board
+        $this->hook->on('template:layout:css', array('template' => 'plugins/Banana/Assets/css/banana-age.css'));
+        
+        // Add custom JavaScript to dynamically color cards
+        $this->hook->on('template:layout:js', array('template' => 'plugins/Banana/Assets/js/banana-age.js'));
     }
 
     public function onStartup()
     {
-        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__ . '/Locale');
+        // Load plugin translations
+        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
     }
 
     public function getPluginName()
     {
-        // Plugin Name MUST be identical to namespace for Plugin Directory to detect updated versions - do not translate the plugin name here
-        return 'PluginNameExampleStudlyCaps';
+        return 'Banana';
     }
 
     public function getPluginDescription()
     {
-        return t('description text');
+        return t('Automatically color-codes task cards based on their age (green for new, yellow for moderate, orange/brown for old tasks)');
     }
 
     public function getPluginAuthor()
     {
-        return '';
+        return 'Your Name';
     }
 
     public function getPluginVersion()
@@ -68,14 +54,14 @@ class Plugin extends Base
         return '1.0.0';
     }
 
-    public function getCompatibleVersion()
-    {
-        // Examples: '>=1.0.37' '<1.0.37' '<=1.0.37'
-        return '>=1.2.32';
-    }
-
     public function getPluginHomepage()
     {
-        return 'https://github.com/url';
+        return 'https://github.com/yourusername/kanboard-plugin-banana';
+    }
+
+    public function getCompatibleVersion()
+    {
+        // Compatible with Kanboard >= 1.2.20
+        return '>=1.2.20';
     }
 }
